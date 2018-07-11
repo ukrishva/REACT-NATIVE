@@ -1,46 +1,51 @@
 import React, { Component } from 'react';
-import { ListView, View, Text } from 'react-native';
+import { ListView} from 'react-native';
 import { connect } from 'react-redux';
-import { employeeFetch } from '../actions';
+import { employeesFetch } from '../actions';
 import _ from 'lodash';
+import ListItem from './ListItem';
 
 class EmployeeList extends Component {
     componentWillMount() {
-        this.props.employeeFetch();
+        console.log('WILLMOUNT');
+        this.props.employeesFetch();
         this.createDataSource(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('PROP_RECEIVE');
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ employee }) {
+    createDataSource({ employees }) {
         const ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2
         });
     
-      this.dataSource = ds.cloneWithRows(employee);
+      this.dataSource = ds.cloneWithRows(employees);
+    }
+    renderRow(employee){
+        return <ListItem employee={employee} />;
     }
 
     render() {
+        console.log(this.props);
         return (
-            <View>
-                <Text> EmployeeList </Text>
-                <Text> EmployeeList </Text>
-                <Text> EmployeeList </Text>
-                <Text> EmployeeList </Text>
-                <Text> EmployeeList </Text>
-            </View>
+         <ListView 
+            enableEmptySections 
+            dataSource={this.dataSource}
+            renderRow={this.renderRow}
+         />
         );
     }
 }
 const mapStateToProps = state => {
-    const employee = _.map(state.employee, (val, uid) => {
+    const employees = _.map(state.employees, (val, uid) => {
       return { ...val, uid };
     });
   
-    return { employee };
+    return { employees };
   };
 
   //export default EmployeeList;
-export default connect(mapStateToProps, { employeeFetch })(EmployeeList); 
+export default connect(mapStateToProps, { employeesFetch })(EmployeeList); 

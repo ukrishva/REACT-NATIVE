@@ -24,6 +24,7 @@ const RouterComponent = () => {
                         onRight={() => Actions.employeeCreate()} 
                         rightTitle="Add"
                         rightTitleStyle={{ paddingLeft:20, color: '#bdc6cf'}}
+                        rightButtonStyle={{ right: 0 }}
                         left={()=>null}
                     />
                         
