@@ -1,4 +1,4 @@
-import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEE_SAVE_SUCCESS } from '../actions/types';
+import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEE_SAVE_SUCCESS, EMPLOYEE_DELETE, EMPLOYEE_BACK } from '../actions/types';
 import { Actions } from 'react-native-router-flux';
 
 const INITIAL_STATE = {
@@ -21,6 +21,10 @@ export default (state = INITIAL_STATE, action ) => {
             return INITIAL_STATE;
         case EMPLOYEE_SAVE_SUCCESS:
             return INITIAL_STATE;
+        case EMPLOYEE_DELETE:
+            return INITIAL_STATE;
+        case EMPLOYEE_BACK:
+            return INITIAL_STATE;    
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardSection, Input, Button } from './common';
 import { connect } from 'react-redux';
-import { employeeUpdate, employeeCreate } from '../actions';
+import { employeeUpdate, employeeCreate,  employeeBack } from '../actions';
 import EmployeeForm from './EmployeeForm';
 class EmployeeCreate extends Component {
 
@@ -10,7 +10,10 @@ class EmployeeCreate extends Component {
 
         this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
     }
-
+    componentWillMount() {
+        this.props.employeeBack();
+        console.log("Try to remove item from form");
+    }
     render() {
         return (
            <Card>
@@ -31,4 +34,4 @@ const mapStateToProps = (state) => {
 };
 
  
-export default connect( mapStateToProps, { employeeUpdate, employeeCreate } ) (EmployeeCreate);
+export default connect( mapStateToProps, { employeeUpdate, employeeCreate, employeeBack } ) (EmployeeCreate);
